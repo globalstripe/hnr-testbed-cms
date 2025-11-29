@@ -1,0 +1,58 @@
+{
+	"name": "admin",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@editorjs/delimiter": "1.4.2",
+		"@editorjs/list": "1.10.0",
+		"@editorjs/quote": "2.7.6",
+		"@editorjs/underline": "1.2.1",
+		"@types/react": "18.2.79",
+		"@webiny/app-admin": "5.43.5",
+		"@webiny/app-admin-users-cognito": "5.43.5",
+		"@webiny/app-form-builder": "5.43.5",
+		"@webiny/app-page-builder": "5.43.5",
+		"@webiny/app-serverless-cms": "5.43.5",
+		"@webiny/cli": "5.43.5",
+		"@webiny/cli-plugin-deploy-pulumi": "5.43.5",
+		"@webiny/plugins": "5.43.5",
+		"@webiny/project-utils": "5.43.5",
+		"core-js": "3.39.0",
+		"cross-fetch": "3.2.0",
+		"invariant": "2.2.4",
+		"prop-types": "15.8.1",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"regenerator-runtime": "0.13.11",
+		"theme": "1.0.0",
+		"tslib": "2.8.1"
+	},
+	"devDependencies": {
+		"cross-env": "5.2.1"
+	},
+	"scripts": {
+		"analyze": "source-map-explorer build/static/js/main.*",
+		"watch": "cross-env PORT=3001 yarn webiny run watch",
+		"build": "yarn webiny run build"
+	},
+	"browserslist": {
+		"development": [
+			"last 2 chrome versions",
+			"last 2 firefox versions",
+			"last 2 edge versions"
+		],
+		"production": [
+			">0.25%",
+			"not op_mini all",
+			"ie 11"
+		]
+	},
+	"adio": {
+		"ignore": {
+			"dependencies": [
+				"@webiny/cli",
+				"tslib"
+			]
+		}
+	}
+}
