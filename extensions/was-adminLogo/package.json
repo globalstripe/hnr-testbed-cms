@@ -7,7 +7,7 @@
     "webiny-extension-type:admin"
   ],
   "dependencies": {
-    "@webiny/app-serverless-cms": "5.43.5",
+    "@webiny/app-serverless-cms": "5.42.3",
     "react": "18.2.0"
   }
 }
