@@ -15,13 +15,13 @@ echo ""
 
 # Check .env configuration
 echo "1. Checking .env configuration..."
-if grep -q "^PULUMI_BACKEND_URL=s3://" .env 2>/dev/null; then
-    BACKEND_URL=$(grep "^PULUMI_BACKEND_URL=" .env | cut -d'=' -f2-)
-    echo "   ✅ PULUMI_BACKEND_URL is set to: ${BACKEND_URL}"
+if grep -q "^WEBINY_PULUMI_BACKEND=s3://" .env 2>/dev/null; then
+    BACKEND_URL=$(grep "^WEBINY_PULUMI_BACKEND=" .env | cut -d'=' -f2-)
+    echo "   ✅ WEBINY_PULUMI_BACKEND is set to: ${BACKEND_URL}"
     echo "   → State should be stored in S3"
     USING_S3=true
-elif grep -q "^#PULUMI_BACKEND_URL" .env 2>/dev/null || ! grep -q "PULUMI_BACKEND_URL" .env 2>/dev/null; then
-    echo "   ⚠️  PULUMI_BACKEND_URL is commented out or not set"
+elif grep -q "^#WEBINY_PULUMI_BACKEND" .env 2>/dev/null || ! grep -q "WEBINY_PULUMI_BACKEND" .env 2>/dev/null; then
+    echo "   ⚠️  WEBINY_PULUMI_BACKEND is commented out or not set"
     echo "   → State will be stored locally in .pulumi/"
     USING_S3=false
 else
@@ -44,7 +44,7 @@ echo ""
 # Check S3 state files
 echo "3. Checking S3 state files:"
 if [ "${USING_S3}" = true ]; then
-    S3_FILES=$(aws s3 ls "s3://${BUCKET_NAME}/organization/" --profile ${PROFILE} --recursive 2>/dev/null | grep "${ENV}" | wc -l | tr -d ' ' || echo "0")
+    S3_FILES=$(aws s3 ls "s3://${BUCKET_NAME}/" --profile ${PROFILE} --recursive 2>/dev/null | grep "${ENV}" | wc -l | tr -d ' ' || echo "0")
     if [ "${S3_FILES}" -gt "0" ]; then
         echo "   Found ${S3_FILES} state file(s) in S3:"
         aws s3 ls "s3://${BUCKET_NAME}/organization/" --profile ${PROFILE} --recursive 2>/dev/null | grep "${ENV}" | awk '{print "      " $4}'
@@ -58,7 +58,7 @@ echo ""
 
 # Check Pulumi stacks
 echo "4. Checking Pulumi stack registry:"
-export PULUMI_BACKEND_URL="${BACKEND_URL:-}" 2>/dev/null || true
+export WEBINY_PULUMI_BACKEND="${BACKEND_URL:-}" 2>/dev/null || true
 export PULUMI_CONFIG_PASSPHRASE=$(grep "^PULUMI_CONFIG_PASSPHRASE=" .env 2>/dev/null | cut -d'=' -f2- || echo "")
 if [ -n "${PULUMI_BACKEND_URL}" ]; then
     STACKS=$(pulumi stack ls --all 2>/dev/null | grep -i "${ENV}" || echo "")
@@ -84,7 +84,7 @@ if [ "${USING_S3}" = true ]; then
 else
     echo "⚠️  State is stored locally in: .pulumi/apps/*/.pulumi/stacks/"
     echo ""
-    echo "To migrate to S3, uncomment PULUMI_BACKEND_URL in .env"
+    echo "To migrate to S3, uncomment WEBINY_PULUMI_BACKEND in .env"
 fi
 echo ""
 

@@ -13485,6 +13485,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"admin-logo@npm:1.0.0, admin-logo@workspace:extensions/adminLogo":
+  version: 0.0.0-use.local
+  resolution: "admin-logo@workspace:extensions/adminLogo"
+  dependencies:
+    "@webiny/app-serverless-cms": "npm:5.43.5"
+    react: "npm:18.2.0"
+  languageName: unknown
+  linkType: soft
+
 "admin@workspace:apps/admin":
   version: 0.0.0-use.local
   resolution: "admin@workspace:apps/admin"
@@ -13503,6 +13512,7 @@ __metadata:
     "@webiny/cli-plugin-deploy-pulumi": "npm:5.43.5"
     "@webiny/plugins": "npm:5.43.5"
     "@webiny/project-utils": "npm:5.43.5"
+    admin-logo: "npm:1.0.0"
     core-js: "npm:3.39.0"
     cross-env: "npm:5.2.1"
     cross-fetch: "npm:3.2.0"

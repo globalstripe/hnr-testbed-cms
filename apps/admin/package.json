@@ -17,6 +17,7 @@
 		"@webiny/cli-plugin-deploy-pulumi": "5.43.5",
 		"@webiny/plugins": "5.43.5",
 		"@webiny/project-utils": "5.43.5",
+		"admin-logo": "1.0.0",
 		"core-js": "3.39.0",
 		"cross-fetch": "3.2.0",
 		"invariant": "2.2.4",
